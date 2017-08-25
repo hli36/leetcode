@@ -1,0 +1,55 @@
+class Solution {
+    // 1. recursive
+    //private int best = Integer.MAX_VALUE;
+    public int minimumTotal(List<List<Integer>> triangle) 
+        
+    
+        //1.recursive
+        /*if (triangle == null || triangle.size() == 0) {
+            return 0;
+        }
+        
+        int size = triangle.size();
+        dfs(0, 0, size, 0, triangle);
+        return best;*/
+        
+        //2.divide & conquer
+        if (triangle == null || triangle.size() == 0)) {
+            return 0;
+        }
+        
+        int size = triangle.size();
+        return divideandConquer(0, 0, size, triangle);
+    
+    
+    //recursive
+   /* private void dfs(int x, int y, int size, int sum, List<List<Integer>> triangle) {
+        if (x == size) {
+            if (sum < best) {
+                best = sum;
+            }
+            return;
+        }
+        
+        sum = sum +triangle.get(x).get(y);
+        dfs(x + 1, y, size, sum, triangle);
+        dfs(x + 1, y + 1, size, sum, triangle);
+    }*/
+    
+    //2. divide & conquer
+    private int divideandConquer(int x, int y, int size, List<List<Integer>> triangle) {
+        if (x == size) {
+            return 0;
+        }
+        //divide
+        int left = dfs(x + 1, y, size, triangle);
+        int right = dfs(x + 1, y + 1, size, triangle);
+        
+        //conquer
+        if (left < right) {
+            return left + triangle.get(x).get(y);
+        }
+        
+        return right + triangle.get(x).get(y);
+    }
+    }
